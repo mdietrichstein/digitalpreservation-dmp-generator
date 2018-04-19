@@ -3,7 +3,7 @@
 ## How to run
 
 1. Check out project
-2. Run `./gradlew clea eclipse` in terminal
+2. Run `./gradlew clean eclipse` in terminal
 3. In Eclipse: `File -> Import -> General -> Existing Projects into Workspace` and choose the root folder of this repository
 4. In Eclipse: Find `DmpGeneratorApplication.java` and right-click then `Run As -> Java Application`
 
