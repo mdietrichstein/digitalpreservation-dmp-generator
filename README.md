@@ -3,10 +3,11 @@
 ## How to run
 
 1. Check out project
-2. In Eclipse: `File -> Import -> General -> Existing Projects into Workspace` and choose the root folder of this repository
-3. In Eclipse: Find `DmpGeneratorApplication.java` and right-click then `Run As -> Java Application`
+2. Run `./gradlew eclipse` in terminal
+3. In Eclipse: `File -> Import -> General -> Existing Projects into Workspace` and choose the root folder of this repository
+4. In Eclipse: Find `DmpGeneratorApplication.java` and right-click then `Run As -> Java Application`
 
-The webapp should now run on `http://localhost:8080`
+The webapp should now run at `http://localhost:8080`
 
 ## Web Resources
 
