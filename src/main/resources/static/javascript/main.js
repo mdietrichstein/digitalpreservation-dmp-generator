@@ -10,6 +10,9 @@ var state = {
 
 function setAuthor(author) {
     state.author = author;
+    console.log(JSON.parse(author).givenName);
+    //JSON.parse(author).givenName;
+    //JSON.parse(author).familyName;
     $('#debugAuthorProfile').text(JSON.stringify(author));
 }
 
