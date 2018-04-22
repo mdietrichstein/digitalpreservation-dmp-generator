@@ -10,7 +10,11 @@ var state = {
 
 function setAuthor(author) {
     state.author = author;
-    $('#debugAuthorProfile').text(JSON.stringify(author));
+    $('#authorName').text(author.givenName + ' ' + author.familyName + ' (' + author.emailAddress + ')');
+    $('#project').text(author.project.title + ' [' + 
+    		author.project.publicationYear + '/' + author.project.publicationMonth + ']');
+    $('#projectUrl').text(author.project.idUrl);
+    $('#debugAuthorAll').text(JSON.stringify(author));
 }
 
 
