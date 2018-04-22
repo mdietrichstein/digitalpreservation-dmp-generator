@@ -23,14 +23,14 @@ public class DmpGeneratorConfiguration {
 
 	@Bean
 	public OkHttpClient okHttpClient() {
-		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();  
+		HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 		logging.setLevel(Level.BODY);
 
 		return new OkHttpClient.Builder()
 								.addInterceptor(logging)
 								.build();
 	}
-	
+
 	@Bean
 	public OrcidRESTApi orcidRESTApi(OkHttpClient okHttpClient) {
 		Retrofit retrofit = new Retrofit.Builder()
@@ -38,10 +38,10 @@ public class DmpGeneratorConfiguration {
         						.client(okHttpClient)
         						.addConverterFactory(JacksonConverterFactory.create())
         						.build();
-		
+
 		return retrofit.create(OrcidRESTApi.class);
 	}
-	
+
 	@Bean
 	public OAIPMHApi oaiPMHApi(OkHttpClient okHttpClient) {
 		Retrofit retrofit = new Retrofit.Builder()
@@ -52,22 +52,27 @@ public class DmpGeneratorConfiguration {
 												new Persister(new AnnotationStrategy())
 								)).build();
 
-		
+
 		return retrofit.create(OAIPMHApi.class);
 	}
-	
+
 	@Bean
 	public GitHubClient githubClient() {
 		GitHubClient gitHubClient = new GitHubClient();
+
+		if(System.getenv("GITHUB_USERNAME") != null && System.getenv("GITHUB_PASSWORD") != null) {
+      gitHubClient.setCredentials(System.getenv("GITHUB_USERNAME"), System.getenv("GITHUB_PASSWORD"));
+    }
+
 		return gitHubClient;
 	}
-	
+
 	@Bean
 	public ContentsService contentsService(GitHubClient gitHubClient) {
 		ContentsService contentsService = new ContentsService(gitHubClient);
 		return contentsService;
 	}
-	
+
 	@Bean
 	public RepositoryService repositoryService(GitHubClient gitHubClient) {
 		RepositoryService repositoryService = new RepositoryService(gitHubClient);
