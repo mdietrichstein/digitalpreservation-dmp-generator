@@ -28,6 +28,9 @@ function loadOrcidProfile(orcidId) {
     });
 }
 
+// Button-Event
+//$('#acceptAuthor').on('click', function (e) { //your awesome code here })
+
 // UI
 
 function setAuthorProfile(profile) {
@@ -36,6 +39,7 @@ function setAuthorProfile(profile) {
 
 function setupUI() {
     setupAuthorSearchUI();
+    $('acceptAuthor').prop('disabled', true);
 }
 
 function setupAuthorSearchUI() {
