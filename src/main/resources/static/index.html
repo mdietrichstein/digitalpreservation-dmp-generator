@@ -22,62 +22,131 @@
 
 
 <div class="container">
-    <br>
-    <!-- Navigation -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#basic_info" role="tab">BASIC INFO</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#administrative_data" role="tab">ADMINISTRATIVE DATA</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#metadata" role="tab">METADATA</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#preservation" role="tab">PRESERVATION</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#generate_dmp" role="tab">GENERATE DMP</a>
-        </li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="tab-pane active" id="basic_info" role="tabpanel">
-            <br>
-            <h2>Add Author</h2>
-            <p>
-                Search for an author and click on the corresponding orcid id to fetch basic info.
-            </p>
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="author_search" id="author_search" placeholder="Search for author on orcid">
+    <div class="card">
+        <div class="card-header">
+            <!-- Navigation -->
+            <ul class="nav nav-pills card-header-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link disabled active" data-toggle="tab" href="#data_import" id="tab_data_import" role="tab">DATA IMPORT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" data-toggle="tab" href="#preservation" id="tab_preservation" role="tab">PRESERVATION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" data-toggle="tab" href="#generate_dmp" id="tab_generate_dmp" role="tab">GENERATE DMP</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="data_import" role="tabpanel">
+                <br>
+                <h2>Search Author</h2>
+                <div class="alert alert-warning" role="alert">
+                    <strong>Requirements</strong>:
+                    <ul>
+                        <li>Author has to be registered on orcid.org</li>
+                        <li>Profile information on orcid has to be <strong>public</strong></li>
+                        <li>The respective project has to be listed first in the profile's <i>Works</i> section</li>
+                        <li>The project has to be hosted on zenodo.org</li>
+                        <li>The project has link to a Github repository</li>
+                    </ul>
                 </div>
-            </form>
-            <div class="row">
-                <pre id="authorName"></pre>
+                <form>
+                    <p>Search for an author and click on the corresponding orcid id to import data relevant to the DMP</p>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="author_search" id="author_search" placeholder="Search for author on orcid">
+                    </div>
+                </form>
+
+                <div class="card d-none" id="orcidInfoCard">
+                    <div class="card-header">ORCID Author Info</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="givenName" class="col-sm-2 col-form-label">Given Name</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="givenName"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="familyName" class="col-sm-2 col-form-label">Family Name</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="familyName"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label">E-mail</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="email"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="projectTitle" class="col-sm-2 col-form-label">Project Title</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="projectTitle"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="projectDOIUrl" class="col-sm-2 col-form-label">Project DOI</label>
+                                <div class="col-sm-10">
+                                    <a href="" class="form-control-plaintext" id="projectDOIUrl" target="_blank"></a>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="publicationDate" class="col-sm-2 col-form-label">Publication Date</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="publicationDate"></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="card d-none" id="projectInfoCard">
+                    <div class="card-header">Zenodo Project Info</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="creators" class="col-sm-2 col-form-label">Creators</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="creators"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="rights" class="col-sm-2 col-form-label">Rights</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="rights"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="type" class="col-sm-2 col-form-label">Type</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="type"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="githubUrl" class="col-sm-2 col-form-label">Github Url</label>
+                                <div class="col-sm-10">
+                                    <a href="" class="form-control-plaintext" id="githubUrl" target="_blank"></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                <div class="button text-right">
+                    <button type="button" class="btn btn-primary disabled" id="continueFromDataImportButton">Continue to PRESERVATION</button>
+                </div>
             </div>
-            <div class="row">
-                <pre id="project"></pre>
+            <div class="tab-pane" id="preservation" role="tabpanel">
+                Not implemented
             </div>
-            <div class="row">
-                <pre id="projectUrl"></pre>
-            </div>
-            <div class="row">
-                <pre id="debugAuthorAll"></pre>
-            </div>
-            <div class="button">
-            	<button type="button" class="btn btn-primary" id="acceptAuthor">Accept</button>
+            <div class="tab-pane" id="generate_dmp" role="tabpanel">
+                Not implemented
             </div>
         </div>
-        <div class="tab-pane" id="metadata" role="tabpanel">
-            Not implemented
-        </div>
-        <div class="tab-pane" id="preservation" role="tabpanel">
-            Not implemented
-        </div>
-        <div class="tab-pane" id="generate_dmp" role="tabpanel">
-            Not implemented
         </div>
     </div>
 </div>
