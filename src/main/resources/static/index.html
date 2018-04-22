@@ -3,47 +3,76 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DMPGen</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<script src="bootstrap/js/bootstrap.js"></script>
+
+<script src="external/typeahead/typeahead.bundle.min.js"></script>
+
+<script src="javascript/main.js"></script>
+
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="external/typeahead/typeaheadjs.css" rel="stylesheet">
 </head>
 <body>
-    <br>
-    <div class="container-fluid">
-        <div class="panel panel-success">
-            <div class="panel-heading" align="center">
-                <h4><b><font color="black" style="font-family: arial;">Please Enter DMP Data</font> </b></h4>
-            </div>
-            <div class="panel-body"align="center">
-                  
-                <div class="container " style="margin-top: 10%; margin-bottom: 10%;">
-    
-                    <div class="panel panel-success" style="max-width: 35%;" align="left">
-                        
-                        <div class="panel-heading form-group">
-                            <b><font color="white">
-                                User-Data</font> </b>
-                        </div>
-                    
-                        <div class="panel-body" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">DMP Generator</a>
+</nav>
 
-                        <form action="Input" method="post" >
-                            <div class="form-group">
-                                <label for="PreName">PreName</label> <input
-                                    type="text" class="form-control" name="txtPreName" id="txtPreName"
-                                    placeholder="Enter PreName" required="required">
-                            </div>
-                            <div class="form-group">
-                                <label for="SurName">SurName</label> <input
-                                    type="text" class="form-control" name="txtSurName" id="txtSurName"
-                                    placeholder="Enter SurName" required="required">
-                            </div>
-                            <button type="submit" style="width: 100%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" ><b>Submit</b></button>                    
-                        </form>
-                        
-                        </div>
-                    </div>
+
+<div class="container">
+    <br>
+    <!-- Navigation -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#basic_info" role="tab">BASIC INFO</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#administrative_data" role="tab">ADMINISTRATIVE DATA</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#metadata" role="tab">METADATA</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#preservation" role="tab">PRESERVATION</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#generate_dmp" role="tab">GENERATE DMP</a>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="basic_info" role="tabpanel">
+            <br>
+            <h2>Add Author</h2>
+            <p>
+                Search for an author and click on the corresponding orcid id to fetch basic info.
+            </p>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="author_search" id="author_search" placeholder="Search for author on orcid">
                 </div>
+            </form>
+            <div class="row">
+                <pre id="debugAuthorProfile"></pre>
             </div>
         </div>
+        <div class="tab-pane" id="administrative_data" role="tabpanel">
+            Not implemented
+        </div>
+        <div class="tab-pane" id="metadata" role="tabpanel">
+            Not implemented
+        </div>
+        <div class="tab-pane" id="preservation" role="tabpanel">
+            Not implemented
+        </div>
+        <div class="tab-pane" id="generate_dmp" role="tabpanel">
+            Not implemented
+        </div>
     </div>
+</div>
+
+
 </body>
 </html>

@@ -5,6 +5,7 @@ gradle.properties
 
 ### Eclipse ###
 bin/
+out/
 
 ### STS ###
 .apt_generated
