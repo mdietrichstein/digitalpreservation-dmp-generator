@@ -208,6 +208,10 @@ function showPreservationTab() {
     $('#tab_preservation').removeClass('disabled').tab('show').addClass('disabled');
 }
 
+function showDMP() {
+	$('#tab_dmp').removeClass('disabled').tab('show').addClass('disabled');
+}
+
 function setupDataImportUI() {
     var orcidResults = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -244,6 +248,11 @@ function setupDataImportUI() {
     $('#continueFromDataImportButton').click(function(e) {
         $(window).scrollTop(0);
         showPreservationTab();
+    });
+    
+    $('#generateHtmlDMP').click(function(e) {
+    	$(window).scrollTop(0);
+    	showDMP();
     });
 }
 
