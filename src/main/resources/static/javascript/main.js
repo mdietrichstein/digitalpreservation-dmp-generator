@@ -219,7 +219,7 @@ function showDMP(json_data) {
 	$('#txt_version').html(state.author.project.publicationDay + '.' + 
 			state.author.project.publicationMonth + '.' + state.author.project.publicationYear);
 	
-	var outFiles = $.grep(state.files, function(v) {
+	var outputFiles = $.grep(state.files, function(v) {
 		return v.tag = 'output_data';
 	});
 	for(var i=0; i<outputFiles.length; i++) {
@@ -242,22 +242,22 @@ function showDMP(json_data) {
 	}
 	
 	
-	$('txt_json').text(json_data);
+	$('#txt_json').text(json_data);
 	
 	$('#tab_dmp').removeClass('disabled').tab('show').addClass('disabled');
 }
 
 function addFileToOutput(file,id){
 	var html = '<tr>';
-    html += '<td><small>'+inputFile.name+'</small></td>';
-    html += '<td><small>size: '+inputFile.size+'</small></td>';
-    if(inputFile.preservation_duration <> null){
-    	html += '<td><small>preserve: '+inputFile.preservation_duration+' years</small></td>';
+    html += '<td><small>'+file.name+'</small></td>';
+    html += '<td><small>size: '+file.size+'</small></td>';
+    if(file.preservation_duration != null){
+    	html += '<td><small>preserve: '+file.preservation_duration+' years</small></td>';
     }else{
     	html += '<td><small>do not preserve</small></td>';
     }
     html += '</tr><tr>';
-    html += '<td><small>'+inputFile.checksum+'</small></td></tr>';
+    html += '<td><small>'+file.checksum+'</small></td></tr>';
 
     $(id).find('> tbody').append(html);
 }
