@@ -197,7 +197,7 @@ function setFileListUI(githubFiles) {
     }
 
     setContinueFromDataImportButtonTitle('Continue to PRESERVATION');
-    $('#continueFromDataImportButton').removeClass('disabled');
+    $('#continueFromDataImportButton').removeClass('disabled').prop('disabled', false);
 }
 
 function setupUI() {
@@ -252,7 +252,7 @@ function setContinueFromDataImportButtonTitle(title) {
 }
 
 function clearUI() {
-    $('#continueFromDataImportButton').addClass('disabled');
+    $('#continueFromDataImportButton').addClass('disabled').prop('disabled', true);
     $('#orcidInfoCard').addClass('d-none');
     $('#profileInfoCard').addClass('d-none');
 
