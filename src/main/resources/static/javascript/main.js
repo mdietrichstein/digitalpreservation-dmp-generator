@@ -208,8 +208,58 @@ function showPreservationTab() {
     $('#tab_preservation').removeClass('disabled').tab('show').addClass('disabled');
 }
 
-function showDMP() {
+function showDMP(json_data) {
+	
+	$('#projectTitle').text(state.author.project.title);
+	
+	$('#txt_author').html(state.author.givenName + ' ' + 
+			state.author.familyName + '<br><ul><li>'+ state.author.emailAddress + '</li><br><li>' +
+			state.author.givenName + '</li></ul>');
+	
+	$('#txt_version').html(state.author.project.publicationDay + '.' + 
+			state.author.project.publicationMonth + '.' + state.author.project.publicationYear);
+	
+	var outFiles = $.grep(state.files, function(v) {
+		return v.tag = 'output_data';
+	});
+	for(var i=0; i<outputFiles.length; i++) {
+		if(i==0){
+			$('#txt_output_list').find('> thead').append('<br><h3><i><b>Produced Data</b></i></h3>');
+		}
+		var outputFile = outputFiles[i];
+		addFileToOutput(outputFile, '#txt_output_list');		
+	}
+	
+	var inputFiles = $.grep(state.files, function(v) {
+		return v.tag = 'input_data';
+	});
+	for(var i=0; i<inputFiles.length; i++) {
+		if(i==0){
+			$('#txt_input_list').find('> thead').append('<br><h3><i><b>Gathered Data</b></i></h3>');
+		}
+		var inputFile = inputFiles[i];
+		addFileToOutput(inputFile, '#txt_input_list');		
+	}
+	
+	
+	$('txt_json').text(json_data);
+	
 	$('#tab_dmp').removeClass('disabled').tab('show').addClass('disabled');
+}
+
+function addFileToOutput(file,id){
+	var html = '<tr>';
+    html += '<td><small>'+inputFile.name+'</small></td>';
+    html += '<td><small>size: '+inputFile.size+'</small></td>';
+    if(inputFile.preservation_duration <> null){
+    	html += '<td><small>preserve: '+inputFile.preservation_duration+' years</small></td>';
+    }else{
+    	html += '<td><small>do not preserve</small></td>';
+    }
+    html += '</tr><tr>';
+    html += '<td><small>'+inputFile.checksum+'</small></td></tr>';
+
+    $(id).find('> tbody').append(html);
 }
 
 function setupDataImportUI() {
@@ -252,7 +302,12 @@ function setupDataImportUI() {
     
     $('#generateHtmlDMP').click(function(e) {
     	$(window).scrollTop(0);
-    	showDMP();
+    	//$.ajax({
+    	//	url: '/dmpFile/getDMP/' + JSON.stringify(state)
+    	//}).then(function(data) {
+    	//	showDMP(data);
+    	//});
+    	showDMP('asdf');
     });
 }
 
