@@ -17,7 +17,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">DMP Generator</a>
+    <span class="navbar-brand">DMP Generator</span>
 </nav>
 
 
@@ -31,9 +31,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" data-toggle="tab" href="#preservation" id="tab_preservation" role="tab">PRESERVATION</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" data-toggle="tab" href="#generate_dmp" id="tab_generate_dmp" role="tab">GENERATE DMP</a>
                 </li>
             </ul>
         </div>
@@ -137,14 +134,32 @@
                 </div>
                 <br>
                 <div class="button text-right">
-                    <button type="button" class="btn btn-primary disabled" id="continueFromDataImportButton">Continue to PRESERVATION</button>
+                    <button type="button" class="btn btn-primary disabled" id="continueFromDataImportButton">Find valid Orcid Profile to continue</button>
                 </div>
             </div>
             <div class="tab-pane" id="preservation" role="tabpanel">
-                Not implemented
-            </div>
-            <div class="tab-pane" id="generate_dmp" role="tabpanel">
-                Not implemented
+                <br>
+                <h2>Preservation Information</h2>
+                <div class="alert alert-info" role="alert">
+                    For each file below, select it's role in the context of preservation and the preservation duration if applicable
+                </div>
+
+                <div class="button text-right">
+                    <button type="button" class="btn btn-secondary" id="generateHtmlDMP">View DMP</button>
+                </div>
+                <br>
+                <table id="fileListTable" class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th style="width: 35%" scope="col">Filename</th>
+                            <th style="width: 35%" scope="col">Path</th>
+                            <th style="width: 15%; text-align: center" scope="col">Tag</th>
+                            <th style="width: 15%; text-align: center" scope="col">Preservation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
         </div>
