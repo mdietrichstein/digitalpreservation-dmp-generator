@@ -306,7 +306,7 @@ function showDMP(json_data) {
 	$('#txt_data_preservation').html('The files that should be preserved are marked throughout the lists of files, which can be seen above. Each file states' +
 			' the duration that it should be preserved for. All github releases are stored on Zenodo as well.<br>The service provided by Zenodo is free and does' +
 			' not incur any costs - neither during the project nor afterwards.<br>Zenodo Infos:<br>CERN<br>Eruopean Organization for Nuclear Research<br>' +
-			'att: IT Department, Digital Repositories Section<br>1211 Genève 23<br>Switzerland<br>http://zenodo.org/');
+			'att: IT Department, Digital Repositories Section<br>1211 Geneve 23<br>Switzerland<br>http://zenodo.org/');
 
 	$('#txt_access').html('Code and data are hosted on the given git repository on github.');
 
@@ -323,7 +323,7 @@ function showDMP(json_data) {
 
 	$('#txt_ressources').html('The ressources for this project are covered by the authors themselves');
 
-	$('#txt_json').text(json_data);
+	$('#txt_json').text(JSON.stringify(json_data));
 
 	$('#tab_dmp').removeClass('disabled').tab('show').addClass('disabled');
 }
