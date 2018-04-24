@@ -4,17 +4,43 @@ public class Project {
 
 	private String doi;
 	private String title;
+	private String description;
 	private String rights;
 	private String publication_date;
 	private String type;
+	private String zenodo_link;
+	private String github_link;
 	
-	public Project(String doi, String title, String rights, String publication_date, String type) {
+	public Project(String doi, String title, String description, String rights, String publication_date, String type, String zenodo_link, String github_link) {
 		super();
 		this.doi = doi;
 		this.title = title;
+		this.description = description;
 		this.rights = rights;
 		this.publication_date = publication_date;
 		this.type = type;
+		this.zenodo_link = zenodo_link;
+		this.github_link = github_link;
+	}
+	
+	
+	public String getZenodo_link() {
+		return zenodo_link;
+	}
+	public void setZenodo_link(String zenodo_link) {
+		this.zenodo_link = zenodo_link;
+	}
+	public String getGithub_link() {
+		return github_link;
+	}
+	public void setGithub_link(String github_link) {
+		this.github_link = github_link;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getDoi() {
 		return doi;

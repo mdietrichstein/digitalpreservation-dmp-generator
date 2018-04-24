@@ -1,4 +1,4 @@
-package at.ac.tuwien.digital_preservation_2018.group2_4.fair.dmpgeneratorFile;
+package at.ac.tuwien.digital_preservation_2018.group2_4.fair.dmpgenerator.dmpfilegenerator;
 
 
 import org.slf4j.Logger;
