@@ -210,7 +210,8 @@ function showPreservationTab() {
 
 function showDMP(json_data) {
 	
-	$('#projectTitle').text(state.author.project.title);
+	$('#projectTitle').html(state.author.project.title);
+	$('#projectDescription').html(state.author.project.description);
 	
 	$('#txt_author').html(state.author.givenName + ' ' + 
 			state.author.familyName + '<br><ul><li>'+ state.author.emailAddress + '</li><br><li>' +
@@ -220,7 +221,7 @@ function showDMP(json_data) {
 			state.author.project.publicationMonth + '.' + state.author.project.publicationYear);
 	
 	var outputFiles = $.grep(state.files, function(v) {
-		return v.tag = 'output_data';
+		return v.tag == 'output_data';
 	});
 	for(var i=0; i<outputFiles.length; i++) {
 		if(i==0){
@@ -231,7 +232,7 @@ function showDMP(json_data) {
 	}
 	
 	var inputFiles = $.grep(state.files, function(v) {
-		return v.tag = 'input_data';
+		return v.tag == 'input_data';
 	});
 	for(var i=0; i<inputFiles.length; i++) {
 		if(i==0){
@@ -241,6 +242,86 @@ function showDMP(json_data) {
 		addFileToOutput(inputFile, '#txt_input_list');		
 	}
 	
+	var softwareFiles = $.grep(state.files, function(v) {
+		return v.tag == 'software';
+	});
+	for(var i=0; i<softwareFiles.length; i++) {
+		if(i==0){
+			$('#txt_software_list').find('> thead').append('<br><h3><i><b>Software</b></i></h3>');
+		}
+		var softwareFile = softwareFiles[i];
+		addFileToOutput(softwareFile, '#txt_software_list');		
+	}
+	
+	var publicationFiles = $.grep(state.files, function(v) {
+		return v.tag == 'publication';
+	});
+	for(var i=0; i<publicationFiles.length; i++) {
+		if(i==0){
+			$('#txt_publication_list').find('> thead').append('<br><h3><i><b>Publication</b></i></h3>');
+		}
+		var publicationFile = publicationFiles[i];
+		addFileToOutput(publicationFile, '#txt_publication_list');		
+	}
+	
+	var documentationFiles = $.grep(state.files, function(v) {
+		return v.tag == 'documentation';
+	});
+	for(var i=0; i<documentationFiles.length; i++) {
+		if(i==0){
+			$('#txt_documentation_list').find('> thead').append('<br><h3><i><b>Documentation</b></i></h3>');
+		}
+		var documentationFile = documentationFiles[i];
+		addFileToOutput(documentationFile, '#txt_documentation_list');		
+	}
+	
+	var presentationFiles = $.grep(state.files, function(v) {
+		return v.tag == 'presentation';
+	});
+	for(var i=0; i<presentationFiles.length; i++) {
+		if(i==0){
+			$('#txt_presentation_list').find('> thead').append('<br><h3><i><b>Presentation Output</b></i></h3>');
+		}
+		var presentationFile = presentationFiles[i];
+		addFileToOutput(presentationFile, '#txt_presentation_list');		
+	}
+	
+	var intermediateFiles = $.grep(state.files, function(v) {
+		return v.tag == 'intermediate';
+	});
+	for(var i=0; i<intermediateFiles.length; i++) {
+		if(i==0){
+			$('#txt_intermediate_list').find('> thead').append('<br><h3><i><b>Intermediate Data</b></i></h3>');
+		}
+		var intermediateFile = intermediateFiles[i];
+		addFileToOutput(intermediateFile, '#txt_intermediate_list');		
+	}
+	
+	//TODO: $('#txt_ethics')
+	
+	//TODO: $('#txt_license')
+	
+	$('#txt_code_preservation').html('The created code will be stored on github. The repository can be found through the link given below under "Github Repository"');
+	
+	$('#txt_data_preservation').html('The files that should be preserved are marked throughout the lists of files, which can be seen above. Each file states' +
+			' the duration that it should be preserved for. All github releases are stored on Zenodo as well.<br>The service provided by Zenodo is free and does' +
+			' not incur any costs - neither during the project nor afterwards.<br>Zenodo Infos:<br>CERN<br>Eruopean Organization for Nuclear Research<br>' +
+			'att: IT Department, Digital Repositories Section<br>1211 Genève 23<br>Switzerland<br>http://zenodo.org/');
+	
+	//TODO: $('#txt_access')
+	
+	$('#data_sharing').html('All code, data and documentation is available on Github, which is licensed under the MIT license. Each Github release then is published ' +
+			'to the Zenodo repository where it also gets assigned a DOI');
+	
+	$('#txt_github').html(state.project.githubUrl);
+	
+	$('#txt_zenodo').html(state.project.identifiers[0])
+	
+	//TODO: $('#txt_usage_after')
+	
+	$('#txt_responsibility').html('Responsible for this DMP are the authors themselves');
+	
+	$('#txt_ressources').html('The ressources for this project are covered by the authors themselves');
 	
 	$('#txt_json').text(json_data);
 	
@@ -249,15 +330,15 @@ function showDMP(json_data) {
 
 function addFileToOutput(file,id){
 	var html = '<tr>';
-    html += '<td><small>'+file.name+'</small></td>';
-    html += '<td><small>size: '+file.size+'</small></td>';
+    html += '<td><small><b>'+file.name+'</b></small></td>';
+    html += '<td><small>size: '+file.size+' b</small></td>';
     if(file.preservation_duration != null){
-    	html += '<td><small>preserve: '+file.preservation_duration+' years</small></td>';
+    	html += '<td><small>  preserve: '+file.preservation_duration+' years</small></td>';
     }else{
-    	html += '<td><small>do not preserve</small></td>';
+    	html += '<td><small>  do not preserve</small></td>';
     }
     html += '</tr><tr>';
-    html += '<td><small>'+file.checksum+'</small></td></tr>';
+    html += '<td><small>checksum: '+file.checksum+'</small></td></tr>';
 
     $(id).find('> tbody').append(html);
 }
@@ -302,13 +383,17 @@ function setupDataImportUI() {
     
     $('#generateHtmlDMP').click(function(e) {
     	$(window).scrollTop(0);
-    	//$.ajax({
-    	//	url: '/dmpFile/getDMP/' + JSON.stringify(state)
-    	//}).then(function(data) {
-    	//	showDMP(data);
-    	//});
-    	showDMP('asdf');
-    });
+    	$.ajax({
+    		type: "POST",
+    		url: '/dmpFile/getDMP',
+    		data: JSON.stringify(state),
+    	    contentType: "application/json; charset=utf-8",
+    	    dataType: "json",
+    	    success: function(data){showDMP(data);
+    	    }
+    	});
+    	
+    } )
 }
 
 function setContinueFromDataImportButtonTitle(title) {
