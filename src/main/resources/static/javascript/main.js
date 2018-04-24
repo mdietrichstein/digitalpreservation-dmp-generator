@@ -297,7 +297,7 @@ function showDMP(json_data) {
 		addFileToOutput(intermediateFile, '#txt_intermediate_list');
 	}
 
-	$('#txt_ethics').html('<No information>');
+	$('#txt_ethics').text('<No information>');
 
 	$('#txt_license').html('Files are marked with their respective license. The license-information of input-files is not known.');
 
