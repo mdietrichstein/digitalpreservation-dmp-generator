@@ -34,3 +34,11 @@ The following API endpoints are implemented:
 `http://localhost:8080/github/owner/mdietrichstein/repository/digitalpreservation-dmp`
 or
 `http://localhost:8080/github/owner/mdietrichstein/repository/digitalpreservation-dmp?ref=1.0.0`
+
+## Docker
+
+1. Build a docker image: `./gradlew build docker`
+2. Run it: `docker run -p 8080:8080 at.ac.tuwien.digital_preservation_2018.group2_4.fair/dmp-generator`
+3. Open `http://localhost:8080` in your browser
+
+
