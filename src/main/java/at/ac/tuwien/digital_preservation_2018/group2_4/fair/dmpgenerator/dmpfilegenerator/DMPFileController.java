@@ -21,7 +21,7 @@ public class DMPFileController {
 	@RequestMapping(value="/getDMP", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public String profile(@RequestBody String data) {
 
-		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mapper = new ObjectMapper(); 
 		DMP dmp = null;
 		try{
 			dmp = mapper.readValue(data, DMP.class);

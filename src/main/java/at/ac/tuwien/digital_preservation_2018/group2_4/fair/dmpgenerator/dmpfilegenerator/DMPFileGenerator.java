@@ -35,6 +35,9 @@ public class DMPFileGenerator {
 			}
 		}
 		
+		//after last file, delete comma
+		data = data.substring(0, data.length() - 1);
+		
 		data = data + end;
 		
 		return data;
@@ -97,7 +100,7 @@ public class DMPFileGenerator {
 			"            },\r\n" + 
 			"            \"dmp:hasDataVolume\": \"%s bytes\"\r\n" + 
 			"          }\r\n" + 
-			"        },\r\n";
+			"        },";
 			
 			private static String license =
 					"          \"dmp:hasIntelectualPropertyRights\": {\r\n" + 
