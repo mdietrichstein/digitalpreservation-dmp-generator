@@ -2,35 +2,54 @@ package at.ac.tuwien.digital_preservation_2018.group2_4.fair.dmpgenerator.model;
 
 public class Author {
 	
-	private String name;
-	private String email;
-	private String orcid_id;
+	private String emailAddress;
+	private String familyName;
+	private String givenName;
+	private AuthorProject project;
 	
-	public Author(String name, String email, String orcid_id) {
+	public Author() {
 		super();
-		this.name = name;
-		this.email = email;
-		this.orcid_id = orcid_id;
 	}
-	public String getName() {
-		return name;
+
+	public Author(String emailAddress, String familyName, String givenName, AuthorProject project) {
+		super();
+		this.emailAddress = emailAddress;
+		this.familyName = familyName;
+		this.givenName = givenName;
+		this.project = project;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public AuthorProject getProject() {
+		return project;
 	}
-	public String getEmail() {
-		return email;
+
+	public void setProject(AuthorProject project) {
+		this.project = project;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public String getEmailAddress() {
+		return emailAddress;
 	}
-	public String getOrcid_id() {
-		return orcid_id;
+
+	public void setEmailaddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
-	public void setOrcid_id(String orcid_id) {
-		this.orcid_id = orcid_id;
+
+	public String getFamilyName() {
+		return familyName;
 	}
-	
+
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
+	}
+
+	public String getGivenName() {
+		return givenName;
+	}
+
+	public void setGivenName(String givenName) {
+		this.givenName = givenName;
+	}
 	
 	
 }

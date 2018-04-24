@@ -15,11 +15,10 @@ import at.ac.tuwien.digital_preservation_2018.group2_4.fair.dmpgenerator.orcid.O
 @RequestMapping("/dmpfile")
 public class DMPFileController {
 
-
 	// defs
 	private static final Logger log = LoggerFactory.getLogger(OrcidController.class.getCanonicalName());
 
-	@RequestMapping(value="/getDMP", method=RequestMethod.POST, consumes = "text/plain")
+	@RequestMapping(value="/getDMP", method=RequestMethod.POST, consumes = "application/json")
 	public String profile(@RequestBody String data) {
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -29,6 +28,8 @@ public class DMPFileController {
 		} catch(Exception e){
 			log.error("Error while mapping the dmp to JSON",e);
 		}
+		
+		log.info(DMPFileGenerator.generate(dmp));
 		
 		return DMPFileGenerator.generate(dmp);
 	}

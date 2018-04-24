@@ -297,9 +297,9 @@ function showDMP(json_data) {
 		addFileToOutput(intermediateFile, '#txt_intermediate_list');		
 	}
 	
-	//TODO: $('#txt_ethics')
+	$('#txt_ethics').html('<No information>');
 	
-	//TODO: $('#txt_license')
+	$('#txt_license').html('Files are marked with their respective license. The license-information of input-files is not known.');
 	
 	$('#txt_code_preservation').html('The created code will be stored on github. The repository can be found through the link given below under "Github Repository"');
 	
@@ -308,7 +308,7 @@ function showDMP(json_data) {
 			' not incur any costs - neither during the project nor afterwards.<br>Zenodo Infos:<br>CERN<br>Eruopean Organization for Nuclear Research<br>' +
 			'att: IT Department, Digital Repositories Section<br>1211 Genève 23<br>Switzerland<br>http://zenodo.org/');
 	
-	//TODO: $('#txt_access')
+	$('#txt_access').html('Code and data are hosted on the given git repository on github.');
 	
 	$('#data_sharing').html('All code, data and documentation is available on Github, which is licensed under the MIT license. Each Github release then is published ' +
 			'to the Zenodo repository where it also gets assigned a DOI');
@@ -317,7 +317,7 @@ function showDMP(json_data) {
 	
 	$('#txt_zenodo').html(state.project.identifiers[0])
 	
-	//TODO: $('#txt_usage_after')
+	$('#txt_usage_after').html('The created data is stored on Github as well as on Zenodo and can be accessed.');
 	
 	$('#txt_responsibility').html('Responsible for this DMP are the authors themselves');
 	
@@ -385,14 +385,14 @@ function setupDataImportUI() {
     	$(window).scrollTop(0);
     	$.ajax({
     		type: "POST",
-    		url: '/dmpFile/getDMP',
+    		url: '/dmpfile/getDMP',
     		data: JSON.stringify(state),
     	    contentType: "application/json; charset=utf-8",
     	    dataType: "json",
-    	    success: function(data){showDMP(data);
-    	    }
-    	});
-    	
+    	    success: function(data){showDMP(data);}
+    	}).then(function(data) {
+            showDMP(data);
+        });
     } )
 }
 
