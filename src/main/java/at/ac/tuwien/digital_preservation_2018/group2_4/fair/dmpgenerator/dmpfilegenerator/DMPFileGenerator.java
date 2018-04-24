@@ -11,23 +11,28 @@ public class DMPFileGenerator {
 		data = String.format(dmp,
 				d.getProject().getTitle(),
 				d.getProject().getDescription(),
-				d.getAuthor().getOrcid_id(),
-				d.getAuthor().getName(),
-				d.getAuthor().getEmail(),
-				d.getProject().getPublication_date(),
-				d.getProject().getZenodo_link(),
-				d.getProject().getGithub_link()
+				//d.getAuthor().getOrcid_id(),
+				d.getAuthor().getGivenName(),
+				d.getAuthor().getFamilyName(),
+				d.getAuthor().getEmailAddress(),
+				d.getAuthor().getProject().getPublicationDay(),
+				d.getAuthor().getProject().getPublicationMonth(),
+				d.getAuthor().getProject().getPublicationYear(),
+				d.getAuthor().getProject().getIdUrl(),
+				d.getProject().getGithubUrl()
 			);
 		
 		for(ProjectFile f : d.getFiles()) {
+			if(f.getTag()!=null) {
 			data = data +
 					String.format(file, 
-							f.getFiletype(),
+							f.getTag(),
 							f.getName(),
 							getLicense(f),
 							f.getChecksum(),
 							f.getSize()
 						);
+			}
 		}
 		
 		data = data + end;
@@ -36,7 +41,7 @@ public class DMPFileGenerator {
 	}
 	
 	private static String getLicense(ProjectFile f) {
-		if(f.getFiletype() != "input")
+		if(f.getTag() != "input")
 			return license;
 		else
 			return "";
@@ -53,41 +58,41 @@ public class DMPFileGenerator {
 			"  },\r\n" + 
 			"  \"@id\": \"http://example.org/dmps/mydmp\",\r\n" + 
 			"  \"@type\": \"dmp:DataManagementPlan\",\r\n" + 
-			"  \"dcterms:title\": \" %s \",\r\n" + 
+			"  \"dcterms:title\": \"%s\",\r\n" + 
 			"  \"dcterms:description\": \" %s \",\r\n" + 
 			"  \"dc:creator\": [\r\n" + 
 			"    {\r\n" + 
-			"      \"@id\": \" %s \",\r\n" + 
-			"      \"foaf:name\": \" %s \",\r\n" + 
-			"      \"foaf:mbox\": \" %s \"\r\n" + 
+			//"      \"@id\": \"%s\",\r\n" + 			//TODO: orcid of creator, input form page1
+			"      \"foaf:name\": \"%s %s\",\r\n" + 
+			"      \"foaf:mbox\": \"%s\"\r\n" + 
 			"    }\r\n" + 
 			"  ],\r\n" + 
-			"  \"dc:date\": \" %s \",\r\n" + 
+			"  \"dc:date\": \"%s.%s.%s\",\r\n" + 
 			"  \"dmp:hasDataObject\": [\r\n" + 
 			"    {\r\n" + 
-			"      \"@id\": \" %s \",\r\n" + 
+			"      \"@id\": \"%s\",\r\n" + 
 			"      \"@type\": \"dmp:SourceCode\",\r\n" + 
 			"      \"dmp:hasIntelectualPropertyRights\": {\r\n" + 
 			"        \"dcterms:license\": \"https://opensource.org/licenses/MIT\"\r\n" + 
 			"      },\r\n" +
-			"      \"dmp:hasDataRepository\": \" %s \",\r\n" +
-			"      \"dmp:hasPreservation\": \" All files that need preservation, are marked with their respective preservation duration. The files themselves are published to Zenodo via github for long-term archival. \",\r\n" + 
-			"      \"dmp:hasDataSharing\": \" All code, data and documentation is available on Github and is licensed under the MIT license. To make the experiment citeable, each Github release is published to the Zenodo repository where it also gets assigned a DOI. \",\r\n" + 
-			"      \"dmp:hasEthicsAndPrivacy\": \" TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO \",\r\n" + 
+			"      \"dmp:hasDataRepository\": \"%s\",\r\n" +
+			"      \"dmp:hasPreservation\": \"All files that need preservation, are marked with their respective preservation duration. The files themselves are published to Zenodo via github for long-term archival.\",\r\n" + 
+			"      \"dmp:hasDataSharing\": \"All code, data and documentation is available on Github and is licensed under the MIT license. To make the experiment citeable, each Github release is published to the Zenodo repository where it also gets assigned a DOI.\",\r\n" + 
+			"      \"dmp:hasEthicsAndPrivacy\": \" <No information> \",\r\n" + 
 			"      \"dmp:hasDocumentation\": \"The documentation can be found in all files that are marked as type documentation. These files can be accessed through the project repository on GitHub.\",\r\n" + 
-			"      \"dmp:hasDataCollection\": \" All files that are collected from external sources are marked as input-files. \",\r\n" + 
+			"      \"dmp:hasDataCollection\": \"All files that are collected from external sources are marked as input-files.\",\r\n" + 
 			"      \"dmp:hasDataObject\": [\r\n";
 			
 			private static String file =
 			"        {\r\n" + 
-			"          \"@type\": \"dmp: %s \",\r\n" + 
-			"          \"dc:title\": \" %s \",\r\n" +
+			"          \"@type\": \"dmp:%s\",\r\n" + 
+			"          \"dc:title\": \"%s\",\r\n" +
 			"%s" + //for license
 			"          \"dmp:hasMetadata\": {\r\n" + 
 			"            \"premis:hasObjectCharacteristics\": {\r\n" + 
 			"              \"premis:fixity\": {\r\n" + 
 			"                \"premis:hasMessageDigestAlgorithm\": \"premis:Fixity:SHA\",\r\n" + 
-			"                \"premis:messageDigest\": \" %s \"\r\n" + 
+			"                \"premis:messageDigest\": \"%s\"\r\n" + 
 			"              }\r\n" + 
 			"            },\r\n" + 
 			"            \"dmp:hasDataVolume\": \"%s bytes\"\r\n" + 

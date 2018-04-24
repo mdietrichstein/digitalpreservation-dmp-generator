@@ -4,34 +4,20 @@ import java.util.ArrayList;
 
 public class DMP {
 	
-	private String preservatino_url;
-	private String document_date;
 	private Author author;
-	private Project project;
 	private ArrayList<ProjectFile> files;
+	private Project project;
 	
-	public DMP(String preservatino_url, String document_date, Author author, Project project,
-			ArrayList<ProjectFile> files) {
+	public DMP() {
 		super();
-		this.preservatino_url = preservatino_url;
-		this.document_date = document_date;
+	}
+	public DMP(Author author, Project project, ArrayList<ProjectFile> files) {
+		super();
 		this.author = author;
 		this.project = project;
 		this.files = files;
 	}
 	
-	public String getPreservatino_url() {
-		return preservatino_url;
-	}
-	public void setPreservatino_url(String preservatino_url) {
-		this.preservatino_url = preservatino_url;
-	}
-	public String getDocument_date() {
-		return document_date;
-	}
-	public void setDocument_date(String document_date) {
-		this.document_date = document_date;
-	}
 	public Author getAuthor() {
 		return author;
 	}
