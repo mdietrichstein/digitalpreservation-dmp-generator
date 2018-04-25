@@ -10,8 +10,9 @@ var state = {
     files: []
 };
 
-function setAuthor(profile) {
+function setAuthor(profile, orcidId) {
     state.author = profile;
+    state.author.orcidId = orcidId;
 }
 
 function setProject(project) {
@@ -24,8 +25,8 @@ function loadOrcidProfile(orcidId) {
     $.ajax({
         url: '/orcid/profile/' + orcidId
     }).then(function(data) {
-        setAuthor(data);
-        setAuthorOrcidInfoUI(data);
+        setAuthor(data, orcidId);
+        setAuthorOrcidInfoUI(data, orcidId);
 
         if(data.project.id) {
             loadZenodoProject(data.project.id)
@@ -67,7 +68,8 @@ function loadGithubFiles(githubUrl) {
 
 // UI
 
-function setAuthorOrcidInfoUI(profile) {
+function setAuthorOrcidInfoUI(profile, orcidId) {
+    $('#orcidId').text(orcidId);
     $('#givenName').text(profile.givenName);
     $('#familyName').text(profile.familyName);
     $('#email').text(profile.emailAddress);
@@ -210,12 +212,12 @@ function showPreservationTab() {
 
 function showDMP(json_data) {
 
-	$('#projectTitle').html(state.author.project.title);
-	$('#projectDescription').html(state.author.project.description);
+	$('#txt_projectTitle').html(state.author.project.title);
+	$('#txt_projectDescription').html(state.author.project.description);
 
 	$('#txt_author').html(state.author.givenName + ' ' +
-			state.author.familyName + '<br><ul><li>'+ state.author.emailAddress + '</li><br><li>' +
-			state.author.givenName + '</li></ul>');
+			state.author.familyName + '<br><ul><li>Orcid Id '+ state.author.orcidId + '</li><li>' +
+			state.author.emailAddress + '</li></ul>');
 
 	$('#txt_version').html(state.author.project.publicationDay + '.' +
 			state.author.project.publicationMonth + '.' + state.author.project.publicationYear);
@@ -321,9 +323,23 @@ function showDMP(json_data) {
 
 	$('#txt_responsibility').html('Responsible for this DMP are the authors themselves');
 
-	$('#txt_ressources').html('The ressources for this project are covered by the authors themselves');
+	$('#txt_resources').html('The resources for this project are covered by the authors themselves');
 
-	$('#txt_json').text(JSON.stringify(json_data));
+	var jsonString = JSON.stringify(json_data, null, 2);
+
+	$('#txt_json').text(jsonString);
+
+
+    var blob = new Blob([jsonString], {type: "application/json"});
+    var url  = URL.createObjectURL(blob);
+
+    $('#jsonDownloadLink')
+        .attr('href', url)
+        .attr('download', 'dmp.json');
+
+    $('#txt_json').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
 
 	$('#tab_dmp').removeClass('disabled').tab('show').addClass('disabled');
 }

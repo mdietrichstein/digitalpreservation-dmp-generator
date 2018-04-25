@@ -1,18 +1,20 @@
 package at.ac.tuwien.digital_preservation_2018.group2_4.fair.dmpgenerator.model;
 
 public class Author {
-	
+
 	private String emailAddress;
 	private String familyName;
 	private String givenName;
+  private String orcidId;
 	private AuthorProject project;
-	
+
 	public Author() {
 		super();
 	}
 
-	public Author(String emailAddress, String familyName, String givenName, AuthorProject project) {
+	public Author(String emailAddress, String familyName, String givenName, String orcidId, AuthorProject project) {
 		super();
+		this.orcidId = orcidId;
 		this.emailAddress = emailAddress;
 		this.familyName = familyName;
 		this.givenName = givenName;
@@ -50,6 +52,12 @@ public class Author {
 	public void setGivenName(String givenName) {
 		this.givenName = givenName;
 	}
-	
-	
+
+  public void setOrcidId(String orcidId) {
+    this.orcidId = orcidId;
+  }
+
+  public String getOrcidId() {
+    return orcidId;
+  }
 }

@@ -3,15 +3,15 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DMPGen</title>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
 <script src="bootstrap/js/bootstrap.js"></script>
-
 <script src="external/typeahead/typeahead.bundle.min.js"></script>
-
 <script src="javascript/main.js"></script>
+<script src="external/highlight/highlight.pack.js"></script>
 
+<link rel="stylesheet" href="external/highlight/styles/atom-one-light.css">
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="external/typeahead/typeaheadjs.css" rel="stylesheet">
 </head>
@@ -64,6 +64,12 @@
                     <div class="card-header">ORCID Author Info</div>
                     <div class="card-body">
                         <form>
+                            <div class="form-group row">
+                                <label for="orcidId" class="col-sm-2 col-form-label">Orcid Id</label>
+                                <div class="col-sm-10">
+                                    <span type="text" class="form-control-plaintext" id="orcidId"></span>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="givenName" class="col-sm-2 col-form-label">Given Name</label>
                                 <div class="col-sm-10">
@@ -166,8 +172,8 @@
             </div>
             <div class="tab-pane" id="dmp" role="tabpanel">
             	<br>
-            	<h2 id="projectTitle"></h2>
-            	<div id="projectDescription"></div>
+            	<h2 id="txt_projectTitle"></h2>
+            	<div id="txt_projectDescription"></div>
             	<br>
             	<h3><b><i>Authors</i></b></h3>
                 <div id="txt_author"></div>
@@ -201,10 +207,14 @@
                 <div id="txt_usage_after"></div>
                 <h3><br><b><i>Responsibility for Datamanagement</i></b></h3>
                 <div id="txt_responsibility"></div>
-                <h3><br><b><i>Ressources</i></b></h3>
-                <div id="txt_ressources"></div>
+                <h3><br><b><i>Resources</i></b></h3>
+                <div id="txt_resources"></div>
                 <br><br>
-                <code id="txt_json"></code>
+                <h3><i>Machine Readable DMP</i></b></h3>
+                <p style="text-align:right">
+                    <a id="jsonDownloadLink">Download</a>
+                </p>
+                <pre id="txt_json" class="json"></pre>
             </div>
         </div>
         </div>
