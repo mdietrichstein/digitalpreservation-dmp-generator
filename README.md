@@ -41,8 +41,9 @@ or
 2. Run it: `docker run -p 8080:8080 at.ac.tuwien.digital_preservation_2018.group2_4.fair/dmp-generator`
 3. Open `http://localhost:8080` in your browser
 
-The docker api might stop working due to limitations on their unauthenticated api access.
-To force the app to use authenticated Github api request you have to set the `GITHUB_USERNAME` and `GITHUB_PASSWORD` environment variables:
-`docker run -e GITHUB_USER='YOUR_GH_USER' -e GITHUB_PASSWORD='YOUR_GH_PW' -p 8080:8080 at.ac.tuwien.digital_preservation_2018.group2_4.fair/dmp-generator`
+The Github API might stop working due to limitations on their unauthenticated API access.
+
+To force the app to use authenticated Github API requests you have to set the `GITHUB_USERNAME` and `GITHUB_PASSWORD` environment variables:
+```docker run -e GITHUB_USER='YOUR_GH_USER' -e GITHUB_PASSWORD='YOUR_GH_PW' -p 8080:8080 at.ac.tuwien.digital_preservation_2018.group2_4.fair/dmp-generator```
 
 
